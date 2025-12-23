@@ -1,0 +1,255 @@
+/* --- Global Layout --- */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f3f4f6; /* Light Gray */
+  color: #1f2937;
+}
+
+.page-container {
+  min-height: 100vh;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.page-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #1e3a8a; /* Dark Blue */
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* --- Form Section --- */
+.control-panel {
+  display: grid;
+  grid-template-columns: 1fr; /* Default Mobile */
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 900px;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  border: 1px solid #e5e7eb;
+}
+
+/* Tablet & Desktop: 3 Kolom */
+@media (min-width: 768px) {
+  .control-panel {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.input-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #4b5563;
+  margin-bottom: 0.5rem;
+}
+
+.form-input, .form-select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  outline: none;
+  background-color: white;
+  box-sizing: border-box; /* Agar padding tidak merusak width */
+  transition: border-color 0.2s;
+}
+
+.form-input:focus, .form-select:focus {
+  border-color: #2563eb; /* Blue focus */
+}
+
+/* --- Buttons --- */
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+  
+  /* Tambahan agar lebar tombol mengikuti lebar form di atasnya */
+  width: 100%; 
+  max-width: 900px; /* Samakan dengan max-width .control-panel */
+}
+
+.btn {
+  /* AGAR PANJANG SAMA: */
+  flex: 1; /* Membuat kedua tombol berbagi ruang 50:50 */
+  
+  padding: 0.75rem 1rem; /* Padding kiri-kanan bisa dikurangi karena sudah flex */
+  font-weight: 700;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 1rem;
+  
+  /* Agar teks & icon di tengah tombol */
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  
+  gap: 0.5rem;
+  transition: transform 0.1s, background-color 0.2s;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary { background-color: #2563eb; } /* Blue */
+.btn-primary:hover { background-color: #1d4ed8; }
+
+
+
+/* --- QR Grid Layout --- */
+.qr-section {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+/* Desktop Large: 2 Kolom */
+@media (min-width: 1280px) {
+  .qr-section {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* --- QR Card Design --- */
+.qr-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 400px;
+  text-align: center;
+}
+
+.qr-header {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #9ca3af;
+  text-transform: uppercase;
+  border-bottom: 2px solid #f3f4f6;
+  padding-bottom: 0.5rem;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+/* --- New Info Table (Detail Index, Role, Printer) --- */
+.qr-info-table {
+  width: 100%;
+  margin-top: 1.5rem;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.qr-info-table td {
+  padding: 6px 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.qr-info-label {
+  text-align: left;
+  font-weight: 600;
+  color: #6b7280;
+  width: 40%;
+}
+
+.qr-info-value {
+  text-align: right;
+  font-weight: 700;
+  color: #111827;
+}
+
+.qr-raw-text {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background: #f9fafb;
+  border: 1px dashed #d1d5db;
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: #374151;
+  word-break: break-all;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* --- Empty State --- */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.4;
+  height: 300px;
+}
+
+.empty-box {
+  width: 200px;
+  height: 200px;
+  background: #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+/* --- Floating Print Button --- */
+.btn-floating {
+  position: fixed;
+  bottom: 2.5rem;
+  right: 2.5rem;
+  background-color: #16a34a; /* Green */
+  color: white;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  z-index: 100;
+  animation: bounce 2s infinite;
+}
+
+.btn-floating:hover {
+  background-color: #15803d;
+  transform: scale(1.05);
+}
+
+.btn-floating:disabled {
+  background-color: #6b7280;
+  cursor: not-allowed;
+  animation: none;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
