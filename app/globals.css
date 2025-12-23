@@ -114,6 +114,10 @@ body {
 }
 
 .btn-primary { background-color: #2563eb; } /* Blue */
+.btn-primary2 { 
+  background-color: #2563eb;
+  margin-top: 1rem;
+ } /* Darker Blue */
 .btn-primary:hover { background-color: #1d4ed8; }
 
 
@@ -145,6 +149,7 @@ body {
   align-items: center;
   min-width: 400px;
   text-align: center;
+  
 }
 
 .qr-header {

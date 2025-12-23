@@ -165,7 +165,7 @@ export default function QRPrintPage() {
                     <td className="qr-info-value">{selectedPrinter || 'None'}</td>
                 </tr>
             </tbody>
-        </table><button onClick={() => handleSaveImage(qrRef, 'B')} className="btn btn-primary">Save QR as Image</button></>
+        </table></>
     );
 
     return (
@@ -246,6 +246,7 @@ export default function QRPrintPage() {
                             {/* Menampilkan Info */}
                             <InfoTable />
                             <div className="qr-raw-text">{qr1}</div>
+                            <button onClick={() => handleSaveImage(qrRef, 'B')} className="btn btn-primary2">Save QR as Image</button>
                         </>
                     ) : (
                         <div className="empty-state">
@@ -264,6 +265,8 @@ export default function QRPrintPage() {
                             {/* Menampilkan Info Index, Role, Printer */}
                             <InfoTable />
                             <div className="qr-raw-text">{qr2}</div>
+                            <button onClick={() => handleSaveImage(qrRef2, 'R')} className="btn btn-primary2">Save QR as Image</button>
+                
                         </>
                     ) : (
                         <div className="empty-state">
@@ -271,7 +274,7 @@ export default function QRPrintPage() {
                             <p>Waiting for data...</p>
                         </div>
                     )}
-                </div>
+                    </div>
             </div>
         </div>
     )
