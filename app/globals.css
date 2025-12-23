@@ -258,3 +258,139 @@ body {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
 }
+
+/* =========================================
+   CSS TAMBAHAN (NEW FEATURES)
+   ========================================= */
+
+/* --- Status Colors (untuk teks 'Ready' atau 'Need Generate') --- */
+.status-red {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.status-green {
+  color: #16a34a; /* Green 600 */
+  font-weight: bold;
+}
+
+/* --- Warning Banner (Kotak Kuning) --- */
+.warning-banner {
+  background-color: #fff3cd;
+  border: 1px solid #ffeeba;
+  color: #856404;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Button Variants Baru --- */
+.btn-danger {
+  background-color: #e74c3c;
+  color: white;
+}
+.btn-danger:hover:not(:disabled) {
+  background-color: #c0392b;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* --- Small Buttons (Tombol Save PNG/JPG di dalam Card) --- */
+.button-group-sm {
+  display: flex;
+  gap: 8px;
+  margin-top: 15px;
+  width: 90%; /* Sesuaikan dengan lebar tabel info */
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  flex: 1; /* Agar kedua tombol berbagi lebar sama rata */
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-outline-primary {
+  background-color: transparent;
+  border: 1px solid #2563eb;
+  color: #2563eb;
+}
+.btn-outline-primary:hover:not(:disabled) {
+  background-color: #2563eb;
+  color: white;
+}
+
+.btn-outline-secondary {
+  background-color: transparent;
+  border: 1px solid #6b7280;
+  color: #6b7280;
+}
+.btn-outline-secondary:hover:not(:disabled) {
+  background-color: #6b7280;
+  color: white;
+}
+
+/* --- BATCH DOWNLOAD SECTION --- */
+.batch-container {
+  margin-top: 3rem;
+  padding: 2rem;
+  border: 2px dashed #d1d5db; /* Garis putus-putus */
+  border-radius: 12px;
+  background-color: #f9fafb;
+  width: 100%;
+  max-width: 900px; /* Samakan dengan control panel */
+  box-sizing: border-box;
+}
+
+.batch-title {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: #1e3a8a;
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.batch-grid {
+  display: grid;
+  /* Grid otomatis menyesuaikan ukuran layar, min lebar kolom 150px */
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.5rem;
+  align-items: end; /* Agar tombol sejajar dengan input */
+}
+
+.batch-warning-text {
+  margin-top: 1.5rem;
+  color: #e74c3c;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  background-color: #fef2f2;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #fee2e2;
+}
+
+/* --- Update Responsive untuk Batch --- */
+@media (max-width: 768px) {
+  .batch-grid {
+    grid-template-columns: 1fr; /* Stack vertikal di HP */
+  }
+}
