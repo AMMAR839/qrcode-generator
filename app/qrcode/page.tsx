@@ -6,8 +6,6 @@ import { generateAddress } from '@/utils/address'
 import { generateName, generatePasswordByRole } from '@/utils/randomString'
 import { useCalibrateLabel, useGetPrinters, usePrintQR } from '@/hooks/usePrinter'
 
-// Pastikan file CSS di atas sudah diimport (jika menggunakan Next.js App Router, biasanya otomatis di layout/global)
-// import './QRPrintPage.css' 
 
 export default function QRPrintPage() {
     const printMutation = usePrintQR()
@@ -122,10 +120,6 @@ export default function QRPrintPage() {
     }, [isAutoRunning, autoIndex, autoEndIndex, batchRole, batchFileType]);
 
 
-    // =================================================================
-    // FUNGSI UTILITIES
-    // =================================================================
-
     const handleGenerate = () => {
         const index = parseInt(indexStr || '1', 10)
         const index2 = index + 10000
@@ -191,8 +185,8 @@ export default function QRPrintPage() {
         const finalRole = isAutoCall ? forceRole : role;
 
         if (!isAutoCall) {
-            if (hasChanges) { alert('⚠️ Generate dulu!'); return; }
-            if (!qr1) { alert('⚠️ QR kosong!'); return; }
+            if (hasChanges) { alert(' Generate dulu!'); return; }
+            if (!qr1) { alert(' QR kosong!'); return; }
         }
 
         const formattedIndex = finalIndex?.padStart(3, '0') || '000'; 
@@ -213,10 +207,40 @@ export default function QRPrintPage() {
         
         ctx.drawImage(originalCanvas, padding, padding);
 
+        // --- BAGIAN YANG DIUBAH (JUSTIFY TEXT) ---
         ctx.font = 'bold 28px Arial';
         ctx.fillStyle = 'black';
-        ctx.textAlign = 'center';
-        ctx.fillText(labelText, newCanvas.width / 2, padding + originalCanvas.height + 40);
+        ctx.textBaseline = 'middle'; // Agar posisi Y lebih akurat di tengah area teks
+
+        const qrWidth = originalCanvas.width; // Lebar area QR saja (tanpa padding canvas baru)
+        const textYpos = padding + originalCanvas.height + (textAreaHeight / 2); // Posisi vertikal
+        
+        // 1. Ukur lebar teks asli jika dirapatkan
+        const textMetrics = ctx.measureText(labelText);
+        const textWidth = textMetrics.width;
+
+        // 2. Cek apakah teks lebih pendek dari lebar QR?
+        if (textWidth < qrWidth && labelText.length > 1) {
+            // Hitung ruang kosong total
+            const availableSpace = qrWidth - textWidth;
+            // Hitung jarak tambahan per huruf
+            const spacing = availableSpace / (labelText.length - 1);
+
+            let currentX = padding; // Mulai menulis dari batas kiri QR Code (padding)
+            ctx.textAlign = 'left'; // Kita gambar manual dari kiri
+
+            for (let i = 0; i < labelText.length; i++) {
+                const char = labelText[i];
+                ctx.fillText(char, currentX, textYpos);
+                
+                // Geser X untuk huruf berikutnya: Lebar huruf ini + Spasi tambahan
+                currentX += ctx.measureText(char).width + spacing;
+            }
+        } else {
+            // Fallback: Jika teks terlalu panjang atau cuma 1 huruf, pakai cara tengah biasa
+            ctx.textAlign = 'center';
+            ctx.fillText(labelText, newCanvas.width / 2, textYpos);
+        }
 
         const link = document.createElement('a');
         const mimeType = fileType === 'png' ? 'image/png' : 'image/jpeg';
@@ -247,7 +271,7 @@ export default function QRPrintPage() {
             <button onClick={() => handleSaveImage(qrRef, prefix, undefined, undefined, 'png')} className="btn btn-sm btn-outline-primary" disabled={isAutoRunning}>
                 Save PNG
             </button>
-            <button onClick={() => handleSaveImage(qrRef, prefix, undefined, undefined, 'jpeg')} className="btn btn-sm btn-outline-secondary" disabled={isAutoRunning}>
+            <button onClick={() => handleSaveImage(qrRef, prefix, undefined, undefined, 'jpeg')} className="btn btn-sm btn-outline-primary" disabled={isAutoRunning}>
                 Save JPG
             </button>
         </div></>
